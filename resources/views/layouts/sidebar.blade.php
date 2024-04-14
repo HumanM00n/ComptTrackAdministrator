@@ -15,13 +15,13 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('dashboard') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <span>Tableau de bord</span></a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('products') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Product</span></a>
+        <span>Produits</span></a>
     </li>
     
     <li class="nav-item">

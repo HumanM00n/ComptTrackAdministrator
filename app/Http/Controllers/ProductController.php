@@ -3,62 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // INDEX PAGE
     public function index()
     {
-        return view('products.index');
+        $product = Product::orderBy('created_at', 'DESC')->get();
+
+        return view('products.index', compact('product'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // FUNCTION CREATE
     public function create()
     {
-        //
+        return view('products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // FUNCTION CREATE
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+
+        return redirect()->route('products')->with('success', 'Produit ajouté avec succès');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return view('products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // FUNCTION MODIFY
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return view('products.edit' , compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // FUNCTION UPDATE  
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->update($request->all());
+
+        return redirect()->route('products')->with('success', 'Le produit a été mis à jour avec succès');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // FUNCTION DELETE
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->delete();
+
+        return redirect()->route('products')->with('success', 'Le produit a été supprimé avec succès');
     }
 }
